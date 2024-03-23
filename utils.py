@@ -1,39 +1,44 @@
 import math
-import statistics
-import random
 
 def distance(A, B):
 
     x1, y1 = A
     x2, y2 = B
 
-    return math.sqrt((x2-x1)**2 + (y2-y1)**2)
+    return round(math.sqrt((x2-x1)**2 + (y2-y1)**2), 2)
 
 def area(a, b, c):
     
     s = (a + b + c)/2
-    return math.sqrt(s*(s - a)*(s - b)*(s - c))
+    if s*(s - a)*(s - b)*(s - c) > 0.000001:
+        return round(math.sqrt(s*(s - a)*(s - b)*(s - c)), 2)
+    else: 
+        return 0
 
 
-def mean(points):
-    points_sum = 0
-    for point in points:
-        points_sum += point
+def mean(list):
+    return round(sum(list)/len(list), 2)   
 
-    return points_sum/len(points)   
+def median(list):
+     l = len(list)
+     list.sort()
+
+     if l % 2 == 0:
+         median1 = list[l//2]
+         median2 = list[l//2 -1]
+         median = (median1 + median2)/2
+         return round(median, 2)
+     else:
+         median = list[l//2]
+         return round(median, 2)
 
 
-def median(points):
-    sorted_points = sorted(points)
-    points_length = len(sorted_points)
-    if points_length % 2 == 0:
-        return (sorted_points[points_length//2 - 1] + points_length[points_length//2]) / 2
-    else:
-        return sorted_points[points_length//2] 
+def range_of_points(list):
+    return round(max(list) - min(list), 2)
 
-def range_of_points(points):
-    return max(points) - min(points)
-
-def stdev(points):
-    return (sum((x - mean(points))**2 for x in points) / len(points)) ** 0.5
+def stdev(list):
+    mean = sum(list) / len(list) 
+    variance = sum([((x - mean) ** 2) for x in list]) / len(list) 
+    res = variance ** 0.5
+    return round(res, 2)
 
