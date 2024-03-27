@@ -11,11 +11,11 @@ for triangle_points in combinations(points, 3):
     side1 = utils.distance(triangle_points[0], triangle_points[1])
     side2 = utils.distance(triangle_points[1], triangle_points[2])
     side3 = utils.distance(triangle_points[2], triangle_points[0])
-    
-   
-    triangle_area = utils.area(side1, side2, side3)
-    areas.append(triangle_area)
-    count = count + 1
+
+    if utils.area(side1, side2, side3) != 0:
+        triangle_area = utils.area(side1, side2, side3)
+        areas.append(triangle_area)
+        count = count + 1
 
 print("\n")
 print("Correct Triangles: ", count)
@@ -30,8 +30,3 @@ print("Using statistics functions: ")
 print("Mean area: ", round(statistics.mean(areas), 2))
 print("Median area: ", round(statistics.median(areas), 2))
 print("Standard deviation of areas: ", round(statistics.stdev(areas), 2))
-
-
-
-
-
